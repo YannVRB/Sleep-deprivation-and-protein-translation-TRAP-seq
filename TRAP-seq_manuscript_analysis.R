@@ -46,25 +46,29 @@ ggplot(`49DEGsoverlap_FC`, aes(x= Vecsey, y= TRAP)) +
   geom_vline(xintercept=0)
 
 # significant DEGs from Vecsey et al. (2019) with fold change from TRAP (this study). Genes are labeled if they have an absolute delta fold change above 0.4.
-colnames(X280VecseyDEGS_withTRAPFC_absDeltaFC) <- c("gene", "TRAP", "Vecsey", "Delta", "AbsDelta")
+colnames(X280VecseyDEGS_withTRAPFC_absDeltaFC) <- c("gene", "Vecsey", "TRAP", "Delta", "AbsDelta")
 dat2 <- subset(X280VecseyDEGS_withTRAPFC_absDeltaFC, AbsDelta > 0.4)
 ggplot(X280VecseyDEGS_withTRAPFC_absDeltaFC, aes(x= Vecsey, y= TRAP, label=gene)) + 
   geom_point() +
-  geom_text_repel(data = dat2)
-  xlab("Fold Change from TRAP-seq") +
-  ylab("Fold Change from Vecsey paper") +
+  geom_text_repel(data = dat2, force = 9) +
+  xlab("Fold Change from Vecsey paper") +
+  ylab("Fold Change from TRAP-seq") +
   ggtitle("Comparison of 280 DEGs from Vecsey with respective FC TRAP") +
   geom_hline(yintercept=0) +
-  geom_vline(xintercept=0)
+  geom_vline(xintercept=0) +
+  scale_x_continuous(limit = c(-2, 2)) +
+  scale_y_continuous(limit = c(-2, 2))
 
 # Significant DEGs from TRAP (this study) with fold change from Vecsey et al. (2019). Genes are labeled if they have an absolute delta fold change above 0.4.
 colnames(X149TRAPDEGs_withVecseyFC_absDeltaFC) <- c("gene", "TRAP", "Vecsey", "Delta", "AbsDelta")
 dat2 <- subset(X149TRAPDEGs_withVecseyFC_absDeltaFC, AbsDelta > 0.4)
 ggplot(X149TRAPDEGs_withVecseyFC_absDeltaFC, aes(x= Vecsey, y= TRAP, label=gene)) + 
   geom_point() +
-  geom_text_repel(data = dat2)
-  xlab("Fold Change from TRAP-seq") +
-  ylab("Fold Change from Vecsey paper") +
+  geom_text_repel(data = dat2, force = 9) +
+  xlab("Fold Change from Vecsey paper") +
+  ylab("Fold Change from TRAP-seq") +
   ggtitle("Comparison of 149 DEGs from TRAP with respective FC Vecsey") +
   geom_hline(yintercept=0) +
-  geom_vline(xintercept=0)
+  geom_vline(xintercept=0) +
+  scale_x_continuous(limit = c(-2, 2)) +
+  scale_y_continuous(limit = c(-2, 2))
